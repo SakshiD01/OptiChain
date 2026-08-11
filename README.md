@@ -95,5 +95,6 @@ pytest -v
 - `POST /api/scheduling/run`
 - `POST /api/simulation/run`
 - `POST /api/scenario/resolve` — body: `{ demand_growth, disruption_prob_scale, forced_open_count, service_level }`
+- `GET /health` — liveness probe used by the sidebar API status badge
 
 Every response includes method metadata / solve time. Infeasible or timed-out solvers are reported honestly — never fabricated.
