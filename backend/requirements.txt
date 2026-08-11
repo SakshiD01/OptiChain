@@ -1,0 +1,23 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+sqlalchemy==2.0.36
+# psycopg2-binary: install when DATABASE_URL points at Neon/Postgres.
+# Omitted from default install — local/CI uses SQLite (see BLOCKERS.md A1).
+pydantic==2.10.4
+pydantic-settings==2.7.0
+numpy==1.26.4
+pandas==2.2.3
+scipy==1.13.1
+statsmodels==0.14.4
+prophet==1.1.6
+scikit-learn==1.5.2
+lightgbm==4.5.0
+# xgboost also needs libomp on macOS; LightGBM is the primary GBT.
+# Native OpenMP: run scripts/bootstrap_native_deps.sh (vendors .deps/libomp).
+# Prophet needs CmdStan once: python -c "from cmdstanpy import install_cmdstan; install_cmdstan()"
+pulp==2.9.0
+ortools==9.11.4210
+simpy==4.1.1
+pytest==8.3.4
+httpx==0.28.1
+python-dotenv==1.0.1
