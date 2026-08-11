@@ -43,3 +43,25 @@ body {
   outline: 2px solid var(--accent-bright);
   outline-offset: 2px;
 }
+
+@keyframes oc-health-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+}
+
+.oc-health-pulse {
+  animation: oc-health-pulse 1.1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oc-health-pulse {
+    animation: none;
+  }
+}
