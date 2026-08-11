@@ -12,6 +12,7 @@ export type ApiHealthState = {
   service: string | null;
   checkedAt: number | null;
   error: string | null;
+  now: number;
   refresh: () => void;
 };
 
@@ -21,6 +22,7 @@ export function useApiHealth(): ApiHealthState {
   const [checkedAt, setCheckedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [tick, setTick] = useState(0);
+  const [now, setNow] = useState(() => Date.now());
 
   const refresh = useCallback(() => {
     setStatus("checking");
@@ -35,6 +37,11 @@ export function useApiHealth(): ApiHealthState {
     };
     document.addEventListener("visibilitychange", onVisibility);
     return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(id);
   }, []);
 
   useEffect(() => {
@@ -54,12 +61,14 @@ export function useApiHealth(): ApiHealthState {
         setService(data.service ?? null);
         setError(ok ? null : "Unexpected health payload");
         setCheckedAt(Date.now());
+        setNow(Date.now());
       } catch (err) {
         if (cancelled || controller.signal.aborted) return;
         setStatus("offline");
         setService(null);
         setError(err instanceof Error ? err.message : "Health check failed");
         setCheckedAt(Date.now());
+        setNow(Date.now());
       }
     })();
 
@@ -76,5 +85,5 @@ export function useApiHealth(): ApiHealthState {
     };
   }, [tick]);
 
-  return { status, service, checkedAt, error, refresh };
+  return { status, service, checkedAt, error, now, refresh };
 }
