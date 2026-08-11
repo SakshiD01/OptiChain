@@ -13,6 +13,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ApiHealthBadge } from "@/components/ApiHealthBadge";
 
 const NAV = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
@@ -80,7 +81,8 @@ export function Sidebar() {
       </nav>
 
       <div className="border-t border-slate-100 px-5 py-4">
-        <p className="text-[11px] leading-relaxed text-slate-400">
+        <ApiHealthBadge />
+        <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
           Seeded FMCG scenario
           <br />
           <span className="text-slate-600">25 SKUs · 4 DCs · 40 nodes</span>
