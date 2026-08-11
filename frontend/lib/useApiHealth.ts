@@ -28,6 +28,20 @@ export function useApiHealth(): ApiHealthState {
   }, []);
 
   useEffect(() => {
+    const onVisibility = () => {
+      if (document.visibilityState === "visible") {
+        setTick((n) => n + 1);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document !== "undefined" && document.visibilityState === "hidden") {
+      return;
+    }
+
     const controller = new AbortController();
     let cancelled = false;
 
@@ -49,7 +63,12 @@ export function useApiHealth(): ApiHealthState {
       }
     })();
 
-    const id = window.setInterval(() => setTick((n) => n + 1), HEALTH_POLL_MS);
+    const id = window.setInterval(() => {
+      if (document.visibilityState === "visible") {
+        setTick((n) => n + 1);
+      }
+    }, HEALTH_POLL_MS);
+
     return () => {
       cancelled = true;
       controller.abort();
