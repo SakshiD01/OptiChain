@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f8fafc;
+  --fg: #0f172a;
+  --fg-muted: #64748b;
+  --accent: #0f766e;
+  --accent-bright: #14b8a6;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  --danger: #e11d48;
+  --success: #059669;
+  --warning: #d97706;
+  --radius: 14px;
+  --color-background: #ffffff;
+  --color-border: #e2e8f0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-feature-settings: "ss01" on, "cv11" on;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent-bright) 30%, white);
+}
+
+.oc-shell {
+  background: var(--bg);
+}
+
+.oc-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
+}
