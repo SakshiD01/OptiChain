@@ -4,3 +4,8 @@ export type HealthStatus = "checking" | "online" | "offline";
 
 export const HEALTH_PATH = "/health";
 export const HEALTH_POLL_MS = 15_000;
+
+export type HealthResponse = {
+  status: string;
+  service?: string;
+};
