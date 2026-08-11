@@ -36,3 +36,12 @@ export function formatHealthStatus(status: HealthStatus): string {
       return "Checking API…";
   }
 }
+
+export function formatCheckedAgo(checkedAt: number | null, now = Date.now()): string {
+  if (!checkedAt) return "Not checked yet";
+  const seconds = Math.max(0, Math.floor((now - checkedAt) / 1000));
+  if (seconds < 5) return "Just now";
+  if (seconds < 60) return `${seconds}s ago`;
+  const minutes = Math.floor(seconds / 60);
+  return `${minutes}m ago`;
+}
