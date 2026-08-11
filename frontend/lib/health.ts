@@ -25,3 +25,14 @@ export async function checkApiHealth(
   }
   return res.json() as Promise<HealthResponse>;
 }
+
+export function formatHealthStatus(status: HealthStatus): string {
+  switch (status) {
+    case "online":
+      return "API online";
+    case "offline":
+      return "API offline";
+    default:
+      return "Checking API…";
+  }
+}
