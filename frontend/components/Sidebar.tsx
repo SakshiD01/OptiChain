@@ -80,9 +80,9 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="border-t border-slate-100 px-5 py-4">
+      <div className="space-y-3 border-t border-slate-100 px-4 py-4">
         <ApiHealthBadge />
-        <p className="mt-3 text-[11px] leading-relaxed text-slate-400">
+        <p className="px-1 text-[11px] leading-relaxed text-slate-400">
           Seeded FMCG scenario
           <br />
           <span className="text-slate-600">25 SKUs · 4 DCs · 40 nodes</span>
