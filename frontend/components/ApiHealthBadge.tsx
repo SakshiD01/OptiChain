@@ -20,10 +20,15 @@ function statusDotClass(status: HealthStatus): string {
 }
 
 export function ApiHealthBadge() {
-  const { status, service, checkedAt, now } = useApiHealth();
+  const { status, service, checkedAt, error, now, refresh } = useApiHealth();
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5">
+    <button
+      type="button"
+      onClick={refresh}
+      className="focus-ring w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-left transition hover:border-slate-300 hover:bg-white"
+      title={error ? error : "Click to refresh API status"}
+    >
       <div className="flex items-center gap-2">
         <span
           className={cn("h-2 w-2 shrink-0 rounded-full", statusDotClass(status))}
@@ -37,10 +42,10 @@ export function ApiHealthBadge() {
             ) : null}
           </p>
           <p className="text-[10px] text-slate-400">
-            {formatCheckedAgo(checkedAt, now)}
+            {formatCheckedAgo(checkedAt, now)} · tap to refresh
           </p>
         </div>
       </div>
-    </div>
+    </button>
   );
 }
