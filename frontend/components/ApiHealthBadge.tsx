@@ -1,5 +1,6 @@
 "use client";
 
+import { API_BASE } from "@/lib/api";
 import { useApiHealth } from "@/lib/useApiHealth";
 import {
   formatCheckedAgo,
@@ -22,13 +23,14 @@ function statusDotClass(status: HealthStatus): string {
 export function ApiHealthBadge() {
   const { status, service, checkedAt, error, now, refresh } = useApiHealth();
   const label = formatHealthStatus(status);
+  const detail = error ? error : `Endpoint ${API_BASE}/health — click to refresh`;
 
   return (
     <button
       type="button"
       onClick={refresh}
       className="focus-ring w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-left transition hover:border-slate-300 hover:bg-white"
-      title={error ? error : "Click to refresh API status"}
+      title={detail}
       aria-label={`${label}. ${formatCheckedAgo(checkedAt, now)}. Click to refresh.`}
     >
       <div className="flex items-center gap-2" aria-live="polite" aria-atomic="true">
